@@ -25,14 +25,15 @@ def index():
     return render_template('download_complete.html')
 
 def process_file(url1, url2, url3, url4, url5):
-    path = os.path.expanduser('~/musics')
+    path = os.path.expanduser('~/musics/downloads')
     download_param_album = '{artist}/{album}/{artist} - {title}'
     download_param_playlist = '{playlist}/{artists}/{album} - {title} {artist}'
 
     # Télécharger chaque URL s'il n'est pas vide
     if url1:
         if "album" in url1:
-            os.chdir(f"{path}")
+            #os.makedirs(f'{path}/download-1', exist_ok=True)
+            os.chdir(f'{path}')
             os.system(f'python3 -m spotdl {url1} --output "{download_param_album}"')
         elif "playlist" in url1:
             os.chdir(f"{path}")
@@ -69,27 +70,14 @@ def process_file(url1, url2, url3, url4, url5):
         elif "playlist" in url5:
             os.chdir(f"{path}")
             os.system(f'python3 -m spotdl {url5} --output "{download_param_playlist}"')
-
-
-# def process_file(url):
-#     path = os.path.expanduser('~/musics')
-#     download_param_album = '{artist}/{album}/{artist} - {title}'
-#     download_param_playlist = '{playlist}/{artists}/{album} - {title} {artist}'
-
-#     if "album" in url:
-#         #os.makedirs(f"{path}")
-#         os.chdir(f"{path}")
-#         print ("album found")
-#         os.system(f'python3 -m spotdl {url} --output "{download_param_album}"')
-#     elif "playlist" in url:
-#         os.chdir(f"{path}")
-#         print("playlist found")
-#         os.system(f'python3 -m spotdl {url} --output "{download_param_playlist}"')
     
+    os.chdir(f'{path}')
+    os.system(f'zip -r musics.zip ./')
 
-# @app.route('/download/<path:filename>')
-# def download_file(filename):
-#     return send_file(filename, attachment_filename=filename, as_attachment=True)
+@app.route('/download', methods=['GET'])
+def download():
+    PATH='/home/gu1ll4um3/musics/downloads/musics.zip'
+    return send_file(PATH,as_attachment=True)
 
 if __name__ == '__main__':
     app.run(debug=True, port=3000)
