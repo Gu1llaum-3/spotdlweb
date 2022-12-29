@@ -27,6 +27,15 @@ h2 {
     color: white
 }
 
+div {
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    /* min-height:100%; */
+    background-color: black;
+    color: white
+}
+
 
 input[type="submit"] {
     display: block;
