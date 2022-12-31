@@ -1,4 +1,5 @@
 from flask import Flask, request, redirect, url_for, send_file, render_template
+from subprocess import run
 import os
 
 app = Flask(__name__)
@@ -9,17 +10,19 @@ def upload_form():
 
 def process_file(urls):
     # path = os.path.expanduser('~/musics/downloads')
-    path = './downloads'
-    download_param_album = '{artist}/{album}/{artist} - {title}'
+    #path = '/home/gu1ll4um3/github/SpotDL_Web/downloads'
+    #path = 'downloads/'
+    download_param_album = 'downloads/{artist}/{album}/{artist} - {title}'
     download_param_playlist = '{playlist}/{artists}/{album} - {title} {artist}'
 
-    os.chdir(f"{path}")
-    os.system(f'rm -rf *')
+    #os.chdir(f"{path}")
+    #os.system(f'rm -rf *')
 
     for url in urls:
         if url:
             if "album" in url:
-                os.system(f'python3 -m spotdl {url} --output "{download_param_album}"')
+                #os.system(f'python3 -m spotdl {url} --output "{download_param_album}"')
+                run(['python3', '-m', 'spotdl', url, '--output', download_param_album])
             elif "playlist" in url:
                 os.system(f'python3 -m spotdl {url} --output "{download_param_playlist}"')
             
@@ -41,14 +44,25 @@ def index():
             return render_template('erreur.html')
 
         urls = [url1, url2, url3, url4, url5]
-        result = process_file(urls)
-    return render_template('download_complete.html')
+        process_file(urls)
+        #print(resultProcessFile)
+        
+        with open('/home/gu1ll4um3/github/SpotDL_Web/erreurs.txt', 'r') as f:
+            result2 = f.readlines()
+    return render_template('download_complete.html', result2=result2)
 
 @app.route('/download', methods=['GET'])
 def download():
     # PATH='/home/gu1ll4um3/musics/downloads/musics.zip'
     PATH='./downloads/musics.zip'
     return send_file(PATH,as_attachment=True)
+
+# @app.route('/errors')
+# def errors():
+#    with open('erreurs.txt', 'r') as f:
+#       lines = f.readlines()
+#    return render_template('logs.html', lines=lines)
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=3000)

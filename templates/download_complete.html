@@ -9,4 +9,17 @@
     <!-- <a class="btn btn-success" href="{{url_for('download')}}">Download</a> -->
     <button onclick="window.location.href ='{{url_for('download')}}';">Download</button>
     <button onclick="window.location.href = '/';">Télécharger à nouveau</button>
+      
+    <form class="logs">
+        <div><h1>Fichier de texte</h1></div>
+        <div>
+            <ul>
+            {% for line in result2 %}
+                <li>{{ line }}</li>
+            {% endfor %}
+            </ul>    
+        </div>
+        
+    </form>  
+      
 </body>

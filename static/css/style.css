@@ -36,6 +36,12 @@ div {
     color: white
 }
 
+.logs {
+    justify-content: center;
+    background-color: black;
+    color: white
+}
+
 
 input[type="submit"] {
     display: block;
