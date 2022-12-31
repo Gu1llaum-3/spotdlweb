@@ -12,10 +12,10 @@ def process_file(urls):
     # path = os.path.expanduser('~/musics/downloads')
     #path = '/home/gu1ll4um3/github/SpotDL_Web/downloads'
     #path = 'downloads/'
-    download_param_album = 'downloads/{artist}/{album}/{artist} - {title}'
+    download_param_album = '{artist}/{album}/{artist} - {title}'
     download_param_playlist = '{playlist}/{artists}/{album} - {title} {artist}'
 
-    #os.chdir(f"{path}")
+    os.chdir('downloads')
     #os.system(f'rm -rf *')
 
     for url in urls:
@@ -27,7 +27,8 @@ def process_file(urls):
                 os.system(f'python3 -m spotdl {url} --output "{download_param_playlist}"')
             
     
-    os.system(f'zip -r musics.zip ./')
+    # os.system(f'zip -r musics.zip ./downloads')
+    run(['zip', '-r', 'musics.zip', '.'])
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -47,14 +48,15 @@ def index():
         process_file(urls)
         #print(resultProcessFile)
         
-        with open('/home/gu1ll4um3/github/SpotDL_Web/erreurs.txt', 'r') as f:
+        with open('/home/gu1ll4um3/github/SpotDL_Web/logs/erreurs.log', 'r') as f:
             result2 = f.readlines()
     return render_template('download_complete.html', result2=result2)
 
 @app.route('/download', methods=['GET'])
 def download():
     # PATH='/home/gu1ll4um3/musics/downloads/musics.zip'
-    PATH='./downloads/musics.zip'
+    #os.chdir('downloads')
+    PATH='downloads/musics.zip'
     return send_file(PATH,as_attachment=True)
 
 # @app.route('/errors')
@@ -62,6 +64,10 @@ def download():
 #    with open('erreurs.txt', 'r') as f:
 #       lines = f.readlines()
 #    return render_template('logs.html', lines=lines)
+
+@app.route('/test')
+def test():
+    return render_template('test.html')
 
 
 if __name__ == '__main__':

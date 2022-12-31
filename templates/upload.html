@@ -15,31 +15,41 @@
 
         <div style="margin-top: 10px;">
             <!-- <label for="url1">URL 1:</label> -->
-            <input type="text" name="url1" id="url1" placeholder="URL" value="https://open.spotify.com/album/3QgFzksD4J43TnGIJOOrRV?si=X6q4QeJ_TtCi9q9fu25Aww">
+            <input type="text" name="url1" id="url1" class="urlbox" pattern="^https://open\.spotify\.com/(?:album|playlist)/[\w-]+(?:\?si=[\w-]+)$" placeholder="Copier un lien d'album ou de playlist">
         </div>
             
         <div style="margin-top: 10px;">
             <!-- <label for="url2">URL 2:</label> -->
-            <input type="text" name="url2" id="url2" placeholder="URL">
+            <input type="text" name="url2" id="url2" class="urlbox" pattern="^https://open\.spotify\.com/(?:album|playlist)/[\w-]+(?:\?si=[\w-]+)$" placeholder="Copier un lien d'album ou de playlist">
         </div>
 
         <div style="margin-top: 10px;">
             <!-- <label for="url3">URL 3:</label> -->
-            <input type="text" name="url3" id="url3" placeholder="URL">
+            <input type="text" name="url3" id="url3" class="urlbox" pattern="^https://open\.spotify\.com/(?:album|playlist)/[\w-]+(?:\?si=[\w-]+)$" placeholder="Copier un lien d'album ou de playlist">
         </div>
 
         <div style="margin-top: 10px;">
             <!-- <label for="url4">URL 4:</label> -->
-            <input type="text" name="url4" id="url4" placeholder="URL">
+            <input type="text" name="url4" id="url4" class="urlbox" pattern="^https://open\.spotify\.com/(?:album|playlist)/[\w-]+(?:\?si=[\w-]+)$" placeholder="Copier un lien d'album ou de playlist">
         </div>
 
         <div style="margin-top: 10px;">
             <!-- <label for="url5">URL 5:</label> -->
-            <input type="text" name="url5" id="url5" placeholder="URL">
+            <input type="text" name="url5" id="url5" class="urlbox" pattern="^https://open\.spotify\.com/(?:album|playlist)/[\w-]+(?:\?si=[\w-]+)$" placeholder="Copier un lien d'album ou de playlist">
         </div>
 
         <div style="margin-top: 10px;">
-            <input type="submit" value="Téléchargement">
+            <button type="submit" id="btn" class="btn" value="Téléchargement">Téléchargement</button>
+            <script>
+                // Récupère l'élément bouton grâce à son ID
+                const bouton = document.getElementById('btn');
+              
+                // Ajoute un écouteur d'événement 'click' au bouton
+                bouton.addEventListener('click', function() {
+                  // Met à jour la valeur de l'attribut innerHTML du bouton
+                  this.innerHTML = "Téléchargement en cours ...";
+                });
+              </script>
         </div>
 
     </form>

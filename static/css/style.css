@@ -53,3 +53,88 @@ button {
     margin: 10px auto;
   }
 
+/* .urlbox{
+    font-size: 13px;
+    padding-left: 7px;
+    padding-right: 7px;
+    border-radius: 9px;
+    width:100%;
+    height:30px;
+} */
+
+/* .urlbox:empty {
+    border: 2px solid #999999;
+    font-size: 13px;
+    padding-left: 7px;
+    padding-right: 7px;
+    border-radius: 9px;
+    width:100%;
+    height:30px;
+}
+
+.urlbox:valid:not(:placeholder-shown){
+    border:rgb(24,216,96) 2px;
+    font-size: 13px;
+    padding-left: 7px;
+    padding-right: 7px;
+    border-radius: 9px;
+    width:100%;
+    height:30px;
+}
+.urlbox:invalid{
+    border: red solid 2px;
+    font-size: 13px;
+    padding-left: 7px;
+    padding-right: 7px;
+    border-radius: 9px;
+    width:100%;
+    height:30px;
+} */
+
+.urlbox:empty {
+    border: 2px solid grey;
+    font-size: 13px;
+    padding-left: 7px;
+    padding-right: 7px;
+    border-radius: 9px;
+    width:100%;
+    height:30px;
+  
+
+}
+.urlbox:valid:not(:placeholder-shown) {
+    border: 2px solid rgb(24,216,96);
+    font-size: 13px;
+    padding-left: 7px;
+    padding-right: 7px;
+    border-radius: 9px;
+    width:100%;
+    height:30px;
+  }
+.urlbox:invalid {
+    border: 2px solid red;
+    font-size: 13px;
+    padding-left: 7px;
+    padding-right: 7px;
+    border-radius: 9px;
+    width:100%;
+    height:30px;
+}
+
+
+
+button{
+    /* margin-right: 0px; */
+    height: 30px;
+    width:130px;
+    border-radius: 5px ;
+    border: none; 
+    /* float: right; */
+    background-color: #ddd;
+    font-weight: bold;
+}
+
+button:hover{
+    background-color: rgb(24,216,96);
+    color: white;
+}
