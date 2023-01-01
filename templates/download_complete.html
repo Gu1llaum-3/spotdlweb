@@ -4,22 +4,31 @@
     <title>SpotDL Web</title>
 </head>
 <body>
-    <h1> SpotDL Web </h1>
-    <h2> Téléchargement Terminé </h2>
-    <!-- <a class="btn btn-success" href="{{url_for('download')}}">Download</a> -->
-    <button onclick="window.location.href ='{{url_for('download')}}';">Download</button>
-    <button onclick="window.location.href = '/';">Télécharger à nouveau</button>
-      
-    <form class="logs">
+    <div class="download_complete">
+        <h1> SpotDL Web </h1>
+        <h2> Téléchargement Terminé </h2>
+        <!-- <a class="btn btn-success" href="{{url_for('download')}}">Download</a> -->
+        <button onclick="window.location.href ='{{url_for('download')}}';">Download</button>
+        <button onclick="window.location.href = '/';">Télécharger à nouveau</button>
+            
+        <form class="logs">
         <div><h1>Fichier de texte</h1></div>
         <div>
             <a>
-            {% for line in result2 %}
-                <p>{{ line }}<br></p>
-            {% endfor %}
+                {% for line in result2 %}
+                    <p>{{ line }}<br></p>
+                {% endfor %}
             </a>    
-        </div>
-        
-    </form>  
+            </div>
+            <div>
+            <a>
+                {% for log in logs %}
+                    <p>{{ log }}<br></p>
+                {% endfor %}
+                </a>      
+            </div>          
+        </form>
+    </div>
+      
       
 </body>

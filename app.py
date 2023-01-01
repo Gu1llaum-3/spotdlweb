@@ -1,6 +1,7 @@
 from flask import Flask, request, redirect, url_for, send_file, render_template
 from subprocess import run
 import os
+import logging
 
 app = Flask(__name__)
 
@@ -18,17 +19,22 @@ def process_file(urls):
     os.chdir('downloads')
     #os.system(f'rm -rf *')
 
+    logs = []  # Créer une liste vide pour stocker les logs
     for url in urls:
         if url:
             if "album" in url:
                 #os.system(f'python3 -m spotdl {url} --output "{download_param_album}"')
                 run(['python3', '-m', 'spotdl', url, '--output', download_param_album])
+                logs.append(f'Téléchargement de l album à l\'adresse {url}')
             elif "playlist" in url:
                 os.system(f'python3 -m spotdl {url} --output "{download_param_playlist}"')
-            
+                logs.append(f'Téléchargement de la playlist à l\'adresse {url}')
     
     # os.system(f'zip -r musics.zip ./downloads')
     run(['zip', '-r', 'musics.zip', '.'])
+    logs.append(f'Création du fichier ZIP musics.zip')
+    
+    return logs  # Retourner la liste des logs
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -45,12 +51,14 @@ def index():
             return render_template('erreur.html')
 
         urls = [url1, url2, url3, url4, url5]
-        process_file(urls)
+        logs = process_file(urls)
+        #process_file(urls)
         #print(resultProcessFile)
         
         with open('/home/gu1ll4um3/github/SpotDL_Web/logs/erreurs.log', 'r') as f:
             result2 = f.readlines()
-    return render_template('download_complete.html', result2=result2)
+    return render_template('download_complete.html', logs=logs)
+    #return render_template('download_complete.html', result2=result2)
 
 @app.route('/download', methods=['GET'])
 def download():

@@ -4,10 +4,16 @@
     <title>SpotDL Web</title>
 </head>
 
-<h1> SpotDL Web </h1>
-<h2> Veuillez entrer au moins une URL ! </h2>
-<button onclick="window.location.href = '/';">Télécharger à nouveau</button>
+<body>
+    <div class="erreur">
+        <h1> SpotDL Web </h1>
+        <h2> Veuillez entrer au moins une URL ! </h2>
+        <button onclick="window.location.href = '/';">Télécharger à nouveau</button>
 
-{% if message %}
-    <p>{{ message }}</p>
-{% endif %}
+        {% if message %}
+            <p>{{ message }}</p>
+        {% endif %}
+    </div>
+
+</body>
+
