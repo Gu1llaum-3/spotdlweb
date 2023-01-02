@@ -1,0 +1,72 @@
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: black;
+}
+
+.erreur {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.download_complete {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.all {
+    align-items: center;
+    flex-direction: column;
+}
+
+.titre{
+    display: flex;
+    justify-content: center;
+    color: rgb(24,216,96);
+    /* align-items: center; */
+}
+
+.procedure {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+h2, a {
+    color: white;
+}
+
+.url {
+    display: block;
+    justify-content:center;
+    width: auto;
+    flex: 1 1 0;
+    /* align-items: center; */
+}
+
+.urlbox {
+    display: block;
+    /* align-items: flex-start; */
+    flex: 1 1 0;
+    width: 225;
+}
+
+form {
+    display: flex ;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width : auto ;
+}
+
+button {
+    display: block;
+    margin: 10px auto;
+  }

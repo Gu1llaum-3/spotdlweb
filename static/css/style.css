@@ -1,72 +1,85 @@
-body{
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #131313;
+    color: #ffffff;
+  }
+
+  .container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+  .form-group {
     display: flex;
-    justify-content: center;
-    align-items: center;
-
-    background-color: black;
-}
-
-.erreur {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
-}
+    margin-bottom: 20px;
+  }
 
-.download_complete {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
+  .form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
 
-.all {
-    align-items: center;
-    flex-direction: column;
-}
+  .form-control {
+    background-color: #232323;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    color: #ffffff;
+  }
 
-.titre{
-    display: flex;
-    justify-content: center;
-    color: rgb(24,216,96);
-    /* align-items: center; */
-}
+  /* .form-control:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgb(24,216,96);
+  } */
+  .form-control:valid:not(:placeholder-shown) {
+    outline: none;
+    border: 2px solid rgb(24,216,96);
+  }
+  .form-control:invalid {
+    outline: none;
+    border: 2px solid red;
+  }
 
-.procedure {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    text-align: center;
-}
 
-h2, a {
-    color: white;
-}
 
-.url {
-    display: block;
-    justify-content:center;
-    width: auto;
-    flex: 1 1 0;
-    /* align-items: center; */
-}
+  .btn {
+    background-color: rgb(24,216,96);
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    color: #131313;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration:none
+  }
 
-.urlbox {
-    display: block;
-    /* align-items: flex-start; */
-    flex: 1 1 0;
-    width: 225;
-}
+  .btn2 {
+      margin-top: 10px;
+      background-color: rgb(24,216,96);
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      color: #131313;
+      font-weight: bold;
+      cursor: pointer;
+      text-decoration:none
+  }
 
-form {
-    display: flex ;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width : auto ;
-}
+  .btn:hover {
+    background-color: rgb(24,216,96);
+    color: whitesmoke
+  }
 
-button {
-    display: block;
-    margin: 10px auto;
+  .title {
+      color: rgb(24,216,96);
+  }
+
+  @media (max-width: 600px) {
+    .container {
+      padding: 10px;
+    }
   }
