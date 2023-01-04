@@ -10,6 +10,17 @@
 <body>
   <div class="container">
     <h1 class="title">SpotDL Web</h1>
+    <div class="bordered">
+      <p>
+        <h3>Procédure</h3>
+        <ul>
+          <li>Se rendre sur Spotify en cliquant <a rel="stylesheet" href="https://open.spotify.com/" target="_blank">ici</a></li>
+          <li>Chercher un Album ou une Playlist</li>
+          <li>Sur Ordinateur : A droite du coeur, cliquez sur ...  puis Partager et Copier le lien vers (Album ou Playlist)</li>
+          <li>Sur Smartphone : Cliquez sur le logo de partage puis Copier le lien</li>
+        </ul>
+      </p>
+    </div>
     <form action="/download" method="POST">
       <div class="form-group">
         <input type="text" class="form-control" name="url1" id="url1" pattern="^https://open\.spotify\.com/(?:album|playlist)/[\w-]+(?:\?si=[\w-]+)?$" placeholder="Entrez l'URL d'un Album ou d'une Playlist">
