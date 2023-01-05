@@ -1,12 +1,10 @@
 from flask import Flask, request, redirect, url_for, send_file, render_template, send_from_directory
 from subprocess import run
 from datetime import datetime
-import os, logging, json
+import os
+import logging
 
 app = Flask(__name__)
-
-with open("identifiants.json") as f:
-  identifiants = json.load(f)
 
 def process_file(urls):
     download_param_album = '{artist}/{album}/{artist} - {title}'
@@ -65,5 +63,6 @@ def download_file():
 def page_not_found(error):
     return render_template('404.html'), 404
 
+
 if __name__ == '__main__':
-    app.run(debug=True, port=3000)
+    app.run(host='0.0.0.0', debug=True, port=3000)

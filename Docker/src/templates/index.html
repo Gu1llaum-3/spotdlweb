@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="static/css/style.css", filename= 'style.css'>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SpotDL Web</title>
+</head>
+
+<body>
+  <div class="container">
+    <h1 class="title">SpotDL Web</h1>
+    <div class="bordered">
+      <p>
+        <h3>Procédure</h3>
+        <ul>
+          <li>Se rendre sur Spotify en cliquant <a rel="stylesheet" href="https://open.spotify.com/" target="_blank">ici</a></li>
+          <li>Chercher un Album ou une Playlist</li>
+          <li>Sur Ordinateur : A droite du coeur, cliquez sur ...  puis Partager et Copier le lien vers (Album ou Playlist)</li>
+          <li>Sur Smartphone : Cliquez sur le logo de partage puis Copier le lien</li>
+        </ul>
+      </p>
+    </div>
+    <form action="/download" method="POST">
+      <div class="form-group">
+        <input type="text" class="form-control" name="url1" id="url1" pattern="^https://open\.spotify\.com/(?:album|playlist)/[\w-]+(?:\?si=[\w-]+)?$" placeholder="Entrez l'URL d'un Album ou d'une Playlist">
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" name="url2" id="url2" pattern="^https://open\.spotify\.com/(?:album|playlist)/[\w-]+(?:\?si=[\w-]+)?$" placeholder="Entrez l'URL d'un Album ou d'une Playlist">
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" name="url3" id="url3" pattern="^https://open\.spotify\.com/(?:album|playlist)/[\w-]+(?:\?si=[\w-]+)?$" placeholder="Entrez l'URL d'un Album ou d'une Playlist">
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" name="url4" id="url4" pattern="^https://open\.spotify\.com/(?:album|playlist)/[\w-]+(?:\?si=[\w-]+)?$" placeholder="Entrez l'URL d'un Album ou d'une Playlist">
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" name="url5" id="url5" pattern="^https://open\.spotify\.com/(?:album|playlist)/[\w-]+(?:\?si=[\w-]+)?$" placeholder="Entrez l'URL d'un Album ou d'une Playlist">
+      </div>
+      <button type="submit" class="btn" id="download-button" onclick="startDownload()">Télécharger</button>
+      <button type="reset" class="btn" id="refresh-button" onclick="refreshPage()">Rafraîchir</button>
+    </form>
+    <!-- <button class="btn2" id="refresh-button" onclick="refreshPage()">Rafraîchir</button> -->
+    <!-- <button type="reset" class="btn" id="refresh-button" onclick="refreshPage()">Rafraîchir</button> -->
+  </div>
+  
+<script>
+  function startDownload() {
+    document.getElementById('download-button').innerHTML = 'Téléchargement en cours...';
+  }
+  function refreshPage() {
+    window.location.reload();
+  }
+</script>
+</body>
+</html
