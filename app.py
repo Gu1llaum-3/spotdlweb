@@ -13,6 +13,10 @@ def process_file(urls):
     download_param_album = '{artist}/{album}/{artist} - {title}'
     download_param_playlist = '{playlist}/{artists}/{album} - {title} {artist}'
 
+    # Créer le dossier 'downloads' s'il n'existe pas
+    if not os.path.exists('downloads'):
+        os.makedirs('downloads')
+
     os.chdir('downloads')
     os.system(f'rm -rf *')
 
