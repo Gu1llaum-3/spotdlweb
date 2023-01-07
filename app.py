@@ -5,8 +5,9 @@ import os, logging, json
 
 app = Flask(__name__)
 
-with open("identifiants.json") as f:
-  identifiants = json.load(f)
+#Page d'identification en cours de développement
+# with open("identifiants.json") as f:
+#   identifiants = json.load(f)
 
 def process_file(urls):
     download_param_album = '{artist}/{album}/{artist} - {title}'
@@ -14,7 +15,6 @@ def process_file(urls):
 
     os.chdir('downloads')
     os.system(f'rm -rf *')
-    #run(['rm', '-rf', '*']) ne fonctionne pas ... ??
 
     for url in urls:
         if url:
@@ -23,7 +23,6 @@ def process_file(urls):
             elif "playlist" in url:
                 run(['python3', '-m', 'spotdl', url, '--output', download_param_playlist])
     
-    #os.system(f'zip -r musics.zip ./downloads')
     run(['zip', '-r', 'musics.zip', '.'])
     os.chdir('../')
 
@@ -31,19 +30,9 @@ def process_file(urls):
 def upload_form():
     return render_template('index.html')
 
-#Fonctionne
-# @app.route('/download/<filename>')
-# def download_file(filename):
-#   PATH='file.txt'
-#   return send_file(PATH, as_attachment=True)
-
 @app.route('/download', methods=['POST'])
 def download_file():
-  # votre code de téléchargement ici
-#   now = datetime.now()
-#   date_time = now.strftime("%Y-%m-%d %H-%M-%S")
-#   with open(f"file.txt", "w") as file:
-#     file.write(date_time)
+
   if request.method == 'POST':
         url1 = request.form['url1']
         url2 = request.form['url2']

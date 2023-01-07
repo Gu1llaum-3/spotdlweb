@@ -1,13 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" href="static/css/style.css", filename= 'style.css'>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SpotDL Web</title>
-</head>
+{% extends 'layout.html' %}
 
-<body>
+{% block body %}
+
   <div class="container">
     <h1 class="title">SpotDL Web</h1>
     <div class="bordered">
@@ -40,17 +34,6 @@
       <button type="submit" class="btn" id="download-button" onclick="startDownload()">Télécharger</button>
       <button type="reset" class="btn" id="refresh-button" onclick="refreshPage()">Rafraîchir</button>
     </form>
-    <!-- <button class="btn2" id="refresh-button" onclick="refreshPage()">Rafraîchir</button> -->
-    <!-- <button type="reset" class="btn" id="refresh-button" onclick="refreshPage()">Rafraîchir</button> -->
   </div>
-  
-<script>
-  function startDownload() {
-    document.getElementById('download-button').innerHTML = 'Téléchargement en cours...';
-  }
-  function refreshPage() {
-    window.location.reload();
-  }
-</script>
-</body>
-</html
+
+{% endblock body %}

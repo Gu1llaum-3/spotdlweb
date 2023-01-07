@@ -1,4 +1,4 @@
 # Ignore dossier docker
-Docker
+Docker/*
 # Ignorer ce qu'il y a dans downloads
 downloads/*
