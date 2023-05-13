@@ -1,16 +1,18 @@
-from flask import Flask, request, redirect, url_for, send_file, render_template, send_from_directory, jsonify
+from flask import Flask, request, send_file, render_template
 from subprocess import run
-from datetime import datetime
-import os, logging, json, secrets
+import os
+import secrets
 
 app = Flask(__name__)
 app.secret_key = secrets.token_hex(16)
+
 
 @app.route('/', methods=['GET', 'POST'])
 def download_file():
     session_id = secrets.token_hex(16)
     download_param_album = '{artist}/{album}/{artist} - {title}'
     download_param_playlist = '{playlist}/{artists}/{album} - {title} {artist}'
+    download_param_track = '{artist}/{album}/{artist} - {title}'
 
     if request.method == 'POST':
         url1 = request.form['url1']
@@ -38,18 +40,22 @@ def download_file():
                     run(['python3', '-m', 'spotdl', url, '--output', download_param_album])
                 elif "playlist" in url:
                     run(['python3', '-m', 'spotdl', url, '--output', download_param_playlist])
+                elif "track" in url:
+                    run(['python3', '-m', 'spotdl', url, '--output', download_param_track])
         
         run(['zip', '-r', 'musics.zip', '.'])
         os.chdir('../')
 
-        PATH = "downloads/musics.zip"
-        return send_file(PATH, as_attachment=True)
+        path = "downloads/musics.zip"
+        return send_file(path, as_attachment=True)
 
     return render_template('index.html')
 
+
 @app.errorhandler(404)
-def page_not_found(error):
+def page_not_found():
     return render_template('404.html'), 404
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=3000)
