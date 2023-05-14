@@ -1,13 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" href="static/css/style.css", filename= 'style.css'>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SpotDL Web</title>
-</head>
+{% extends 'layout.html' %}
 
-<body>
+{% block body %}
+
   <div class="container">
     <h1 class="title">SpotDL Web</h1>
     <div class="bordered">
@@ -21,36 +15,25 @@
         </ul>
       </p>
     </div>
-    <form action="/download" method="POST">
+    <form action="/" method="POST">
       <div class="form-group">
-        <input type="text" class="form-control" name="url1" id="url1" pattern="^https://open\.spotify\.com/(?:album|playlist)/[\w-]+(?:\?si=[\w-]+)?$" placeholder="Entrez l'URL d'un Album ou d'une Playlist">
+        <input type="text" class="form-control" name="url1" id="url1" pattern="^https://open\.spotify\.com/(?:album|playlist|track)/[\w-]+(?:\?si=[\w-]+)?$" placeholder="Entrez l'URL d'un Album ou d'une Playlist">
       </div>
       <div class="form-group">
-        <input type="text" class="form-control" name="url2" id="url2" pattern="^https://open\.spotify\.com/(?:album|playlist)/[\w-]+(?:\?si=[\w-]+)?$" placeholder="Entrez l'URL d'un Album ou d'une Playlist">
+        <input type="text" class="form-control" name="url2" id="url2" pattern="^https://open\.spotify\.com/(?:album|playlist|track)/[\w-]+(?:\?si=[\w-]+)?$" placeholder="Entrez l'URL d'un Album ou d'une Playlist">
       </div>
       <div class="form-group">
-        <input type="text" class="form-control" name="url3" id="url3" pattern="^https://open\.spotify\.com/(?:album|playlist)/[\w-]+(?:\?si=[\w-]+)?$" placeholder="Entrez l'URL d'un Album ou d'une Playlist">
+        <input type="text" class="form-control" name="url3" id="url3" pattern="^https://open\.spotify\.com/(?:album|playlist|track)/[\w-]+(?:\?si=[\w-]+)?$" placeholder="Entrez l'URL d'un Album ou d'une Playlist">
       </div>
       <div class="form-group">
-        <input type="text" class="form-control" name="url4" id="url4" pattern="^https://open\.spotify\.com/(?:album|playlist)/[\w-]+(?:\?si=[\w-]+)?$" placeholder="Entrez l'URL d'un Album ou d'une Playlist">
+        <input type="text" class="form-control" name="url4" id="url4" pattern="^https://open\.spotify\.com/(?:album|playlist|track)/[\w-]+(?:\?si=[\w-]+)?$" placeholder="Entrez l'URL d'un Album ou d'une Playlist">
       </div>
       <div class="form-group">
-        <input type="text" class="form-control" name="url5" id="url5" pattern="^https://open\.spotify\.com/(?:album|playlist)/[\w-]+(?:\?si=[\w-]+)?$" placeholder="Entrez l'URL d'un Album ou d'une Playlist">
+        <input type="text" class="form-control" name="url5" id="url5" pattern="^https://open\.spotify\.com/(?:album|playlist|track)/[\w-]+(?:\?si=[\w-]+)?$" placeholder="Entrez l'URL d'un Album ou d'une Playlist">
       </div>
       <button type="submit" class="btn" id="download-button" onclick="startDownload()">Télécharger</button>
       <button type="reset" class="btn" id="refresh-button" onclick="refreshPage()">Rafraîchir</button>
     </form>
-    <!-- <button class="btn2" id="refresh-button" onclick="refreshPage()">Rafraîchir</button> -->
-    <!-- <button type="reset" class="btn" id="refresh-button" onclick="refreshPage()">Rafraîchir</button> -->
   </div>
-  
-<script>
-  function startDownload() {
-    document.getElementById('download-button').innerHTML = 'Téléchargement en cours...';
-  }
-  function refreshPage() {
-    window.location.reload();
-  }
-</script>
-</body>
-</html
+
+{% endblock body %}

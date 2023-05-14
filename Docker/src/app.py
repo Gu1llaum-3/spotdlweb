@@ -1,48 +1,20 @@
-from flask import Flask, request, redirect, url_for, send_file, render_template, send_from_directory
+from flask import Flask, request, send_file, render_template
 from subprocess import run
-from datetime import datetime
 import os
-import logging
+import secrets
 
 app = Flask(__name__)
+app.secret_key = secrets.token_hex(16)
 
-def process_file(urls):
-    download_param_album = '{artist}/{album}/{artist} - {title}'
-    download_param_playlist = '{playlist}/{artists}/{album} - {title} {artist}'
-
-    os.chdir('downloads')
-    os.system(f'rm -rf *')
-    #run(['rm', '-rf', '*']) ne fonctionne pas ... ??
-
-    for url in urls:
-        if url:
-            if "album" in url:
-                run(['python3', '-m', 'spotdl', url, '--output', download_param_album])
-            elif "playlist" in url:
-                run(['python3', '-m', 'spotdl', url, '--output', download_param_playlist])
-    
-    #os.system(f'zip -r musics.zip ./downloads')
-    run(['zip', '-r', 'musics.zip', '.'])
-    os.chdir('../')
 
 @app.route('/', methods=['GET', 'POST'])
-def upload_form():
-    return render_template('index.html')
-
-#Fonctionne
-# @app.route('/download/<filename>')
-# def download_file(filename):
-#   PATH='file.txt'
-#   return send_file(PATH, as_attachment=True)
-
-@app.route('/download', methods=['POST'])
 def download_file():
-  # votre code de téléchargement ici
-#   now = datetime.now()
-#   date_time = now.strftime("%Y-%m-%d %H-%M-%S")
-#   with open(f"file.txt", "w") as file:
-#     file.write(date_time)
-  if request.method == 'POST':
+    session_id = secrets.token_hex(16)
+    download_param_album = '{artist}/{album}/{artist} - {title}'
+    download_param_playlist = '{playlist}/{artists}/{album} - {title} {artist}'
+    download_param_track = '{artist}/{album}/{artist} - {title}'
+
+    if request.method == 'POST':
         url1 = request.form['url1']
         url2 = request.form['url2']
         url3 = request.form['url3']
@@ -55,14 +27,35 @@ def download_file():
 
         urls = [url1, url2, url3, url4, url5]
   
-  process_file(urls)
-  PATH = "downloads/musics.zip"
-  return send_file(PATH, as_attachment=True)
+        # Créer le dossier 'downloads' s'il n'existe pas
+        if not os.path.exists('downloads'):
+            os.makedirs('downloads')
+
+        os.chdir('downloads')
+        os.system(f'rm -rf *')
+
+        for url in urls:
+            if url:
+                if "album" in url:
+                    run(['python3', '-m', 'spotdl', url, '--output', download_param_album])
+                elif "playlist" in url:
+                    run(['python3', '-m', 'spotdl', url, '--output', download_param_playlist])
+                elif "track" in url:
+                    run(['python3', '-m', 'spotdl', url, '--output', download_param_track])
+        
+        run(['zip', '-r', 'musics.zip', '.'])
+        os.chdir('../')
+
+        path = "downloads/musics.zip"
+        return send_file(path, as_attachment=True)
+
+    return render_template('index.html')
+
 
 @app.errorhandler(404)
-def page_not_found(error):
+def page_not_found():
     return render_template('404.html'), 404
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True, port=3000)
+    app.run(debug=True, port=3000)
