@@ -1,10 +1,9 @@
 version: '3.3'
 services:
-    spotdlweb:
+    spotdl_web:
+        image: 'spotdl_web:latest'
+        container_name: spotdl_web
+        hostname: spotdl_web
         ports:
-            - '80:3000'
-        container_name: spotdlweb
-        #volumes:
-            #- '/docker/containers/spotdl/musics:/app/downloads'
+            - '100:3000'
         restart: unless-stopped
-        image: 'spotdlweb:latest'
