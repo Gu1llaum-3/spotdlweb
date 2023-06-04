@@ -1,0 +1,54 @@
+kind: pipeline
+name: default
+
+steps:
+- name: docker_gitea  
+  image: plugins/docker
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    repo: git.netpowa.fr/guillaume/spotdlweb
+    # auto_tag: true
+    registry: git.netpowa.fr
+    tags:
+      - latest
+      - v1.0.1
+  when:
+    branch: main
+
+- name: docker_hub  
+  image: plugins/docker
+  settings:
+    username:
+      from_secret: dockerhub_username
+    password:
+      from_secret: dockerhub_password
+    repo: gu1llaum3/spotdlweb
+    # auto_tag: true
+    tags:
+      - latest
+      - v1.0.1
+  when:
+    branch: main
+
+- name: notify_success
+  image: curlimages/curl
+  environment:
+    NOTIFY_URL:
+      from_secret: ntfy_url
+  commands:
+    - curl -d "La pipeline a réussi" $NOTIFY_URL
+  when:
+      status: [ success ]
+
+- name: notify_failure
+  image: curlimages/curl
+  environment:
+    NOTIFY_URL:
+      from_secret: ntfy_url
+  commands:
+    - curl -d "La pipeline a échoué" $NOTIFY_URL
+  when:
+    status: [failure]
