@@ -1,0 +1,11 @@
+version: '3.3'
+services:
+  spotdlweb:
+    image: gu1llaum3/spotdlweb:latest
+    container_name: spotdlweb
+    hostname: spotdlweb
+    ports:
+      - 3000:3000
+    volumes:
+      - ./musics:/app/downloads
+    restart: unless-stopped

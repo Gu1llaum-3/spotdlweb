@@ -28,6 +28,27 @@ def process_file(urls):
     os.chdir('../')
 
 
+def process_file_local(urls):
+    download_param_album = '{artist}/{album}/{artist} - {title}'
+    download_param_playlist = '{playlist}/{artists}/{album} - {title} {artist}'
+    download_param_track = '{artist}/{album}/{artist} - {title}'
+
+    os.chdir('temp')
+    os.system(f'rm -rf *')
+
+    for url in urls:
+        if url:
+            if "album" in url:
+                run(['python3', '-m', 'spotdl', url, '--output', download_param_album])
+            elif "playlist" in url:
+                run(['python3', '-m', 'spotdl', url, '--output', download_param_playlist])
+            elif "track" in url:
+                run(['python3', '-m', 'spotdl', url, '--output', download_param_track])
+    
+    run(['zip', '-r', 'musics.zip', '.'])
+    os.chdir('../')
+
+
 @app.route('/', methods=['GET', 'POST'])
 def upload_form():
     return render_template('index.html')
@@ -41,34 +62,43 @@ def upload_form():
 
 @app.route('/download', methods=['POST'])
 def download_file():
-    # votre code de téléchargement ici
-    #   now = datetime.now()
-    #   date_time = now.strftime("%Y-%m-%d %H-%M-%S")
-    #   with open(f"file.txt", "w") as file:
-    #     file.write(date_time)
     if request.method == 'POST':
+        action = request.form.get('action')
         url1 = request.form['url1']
         url2 = request.form['url2']
         url3 = request.form['url3']
-        url4 = request.form['url4']
-        url5 = request.form['url5']
 
-        urls = [url1, url2, url3, url4, url5]
+        urls = [url1, url2, url3]
 
         # Vérifier si au moins un champ est vide
-        if not url1 and not url2 and not url3 and not url4 and not url5:
+        if not url1 and not url2 and not url3 :
             return render_template('erreur.html')
 
+        if action == 'download':
         # Créer le dossier 'downloads' s'il n'existe pas
-        if not os.path.exists('downloads'):
-            os.makedirs('downloads')
+            if not os.path.exists('downloads'):
+                os.makedirs('downloads')
 
-        process_file(urls)
+            process_file(urls)
 
-    # path = "downloads/musics.zip"
-    # return send_file(path, as_attachment=True)
-    return render_template('finish.html')
+            # path = "downloads/musics.zip"
+            # return send_file(path, as_attachment=True)
+            return render_template('finish_server.html')
+        
+        if action == 'downloadlocal':
 
+            # Créer le dossier 'downloads' s'il n'existe pas
+            if not os.path.exists('temp'):
+                os.makedirs('temp')
+
+            process_file_local(urls)
+
+            return render_template('finish_local.html')
+
+@app.route('/zip', methods=['GET', 'POST'])
+def zip():
+    path = "temp/musics.zip"
+    return send_file(path, as_attachment=True)
 
 @app.errorhandler(404)
 def page_not_found(error):  # error est necessaire
