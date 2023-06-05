@@ -55,7 +55,7 @@ steps:
     branch: main
     status: [failure]
 
-- name: docker_gitea  
+- name: docker_dev_gitea  
   image: plugins/docker
   settings:
     username:
@@ -70,7 +70,7 @@ steps:
   when:
     branch: dev
 
-- name: notify_success
+- name: notify_dev_success
   image: curlimages/curl
   environment:
     NOTIFY_URL:
@@ -81,7 +81,7 @@ steps:
       branch: dev
       status: [ success ]
 
-- name: notify_failure
+- name: notify_dev_failure
   image: curlimages/curl
   environment:
     NOTIFY_URL:
