@@ -36,13 +36,11 @@ def download_file():
         url1 = request.form['url1']
         url2 = request.form['url2']
         url3 = request.form['url3']
-        url4 = request.form['url4']
-        url5 = request.form['url5']
 
-        urls = [url1, url2, url3, url4, url5]
+        urls = [url1, url2, url3]
 
         # Vérifier si au moins un champ est vide
-        if not url1 and not url2 and not url3 and not url4 and not url5:
+        if not url1 and not url2 and not url3 :
             return render_template('erreur.html')
 
         # Créer le dossier 'downloads' s'il n'existe pas
