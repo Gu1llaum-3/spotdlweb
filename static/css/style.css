@@ -15,8 +15,8 @@ body {
   .bordered {
     border: 1px solid rgb(24,216,96);
     border-radius: 5px;
-    padding: 20px;
-    margin-bottom: 20px;
+    padding: 10px;
+    margin-bottom: 15px;
   }
 
   li {
@@ -66,14 +66,14 @@ body {
     background-color: rgb(24,216,96);
     border: none;
     border-radius: 5px;
-    padding: 10px 20px;
+    padding: 10px 10px;
     color: #131313;
     font-weight: bold;
     cursor: pointer;
     text-decoration:none
   }
 
-  .btn2 {
+  /* .btn2 {
       margin-top: 10px;
       background-color: rgb(24,216,96);
       border: none;
@@ -83,7 +83,7 @@ body {
       font-weight: bold;
       cursor: pointer;
       text-decoration:none
-  }
+  } */
 
   .btn:hover {
     background-color: rgb(24,216,96);
@@ -98,3 +98,4 @@ body {
     .container {
       padding: 10px;
     }
+  }
